@@ -1,4 +1,4 @@
-# common
+# Slick Common package
 
 [![Latest Version](https://img.shields.io/github/release/slickframework/common.svg?style=flat-square)](https://github.com/slickframework/common/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
