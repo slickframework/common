@@ -1,20 +1,45 @@
 {
-    "name": "slick/common",
-    "description": "Common libraries for Slick Framework",
-    "license": "MIT",
-    "keywords": ["slick", "common"],
-    "autoload": {
-        "psr-0": {
-            "Slick\\Common\\": "src/"
-        }
-    },
-    "require": {
-        "slick/Utility": "self.version"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev",
-            "dev-develop": "1.1-dev"
-        }
+  "name": "slick/common",
+  "description": "Slick common package contains a set of useful classes and traits for Slick library",
+  "keywords": [
+    "slick",
+    "common",
+    "annotations",
+    "inspector",
+    "magic methods"
+  ],
+  "homepage": "https://github.com/slickframework/common",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Filipe Silva",
+      "email": "silvam.filipe@gmail.com",
+      "role": "Developer"
     }
+  ],
+  "require": {
+    "php" : ">=5.4.0",
+    "ext-curl": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit" : "4.*",
+    "scrutinizer/ocular": "~1.1",
+    "behat/behat": "~3.0.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Slick\\Common\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Slick\\Tests\\Common\\": "tests"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.1  -dev",
+      "dev-develop": "1.2-dev"
+    }
+  }
 }
