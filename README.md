@@ -5,7 +5,7 @@
 [![Build Status](https://img.shields.io/travis/slickframework/common/master.svg?style=flat-square)](https://travis-ci.org/slickframework/common)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/slickframework/common.svg?style=flat-square)](https://scrutinizer-ci.com/g/slickframework/common/code-structure)
 [![Quality Score](https://img.shields.io/scrutinizer/g/slickframework/common.svg?style=flat-square)](https://scrutinizer-ci.com/g/slickframework/common)
-[![Total Downloads](https://img.shields.io/packagist/dt/league/common.svg?style=flat-square)](https://packagist.org/packages/league/common)
+[![Total Downloads](https://img.shields.io/packagist/dt/league/common.svg?style=flat-square)](https://packagist.org/packages/slick/common)
 
 Slick common package contains a set of useful classes and traits that are used by almost every class in the entire
 Slick library. They form a solid base to develop on top of and help you remove the tedious work of create getters
