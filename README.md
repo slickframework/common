@@ -11,6 +11,8 @@ Slick common package contains a set of useful classes and traits that are used b
 Slick library. They form a solid base to develop on top of and help you remove the tedious work of create getters
 and setters, allowing read and/or write access to the properties and inspect classes and properties.
 
+This package is extracted from [Slick framework](https://github.com/slickframework/slick).
+
 This package is compliant with PSR-2 code standards and PSR-4 autoload standards. It
 also applies the [semantic version 2.0.0](http://semver.org) specification.
 
