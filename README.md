@@ -2,10 +2,10 @@
 
 [![Latest Version](https://img.shields.io/github/release/slickframework/common.svg?style=flat-square)](https://github.com/slickframework/common/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/slickframework/common/master.svg?style=flat-square)](https://travis-ci.org/slickframework/common)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/slickframework/common.svg?style=flat-square)](https://scrutinizer-ci.com/g/slickframework/common/code-structure)
-[![Quality Score](https://img.shields.io/scrutinizer/g/slickframework/common.svg?style=flat-square)](https://scrutinizer-ci.com/g/slickframework/common)
-[![Total Downloads](https://img.shields.io/packagist/dt/league/common.svg?style=flat-square)](https://packagist.org/packages/slick/common)
+[![Build Status](https://img.shields.io/travis/slickframework/common/develop.svg?style=flat-square)](https://travis-ci.org/slickframework/common)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/slickframework/common.svg?style=flat-square&b=develop)](https://scrutinizer-ci.com/g/slickframework/common/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/slickframework/common.svg?style=flat-square&b=develop)](https://scrutinizer-ci.com/g/slickframework/common)
+[![Total Downloads](https://img.shields.io/packagist/dt/slick/common.svg?style=flat-square)](https://packagist.org/packages/slick/common)
 
 Slick common package contains a set of useful classes and traits that are used by almost every class in the entire
 Slick library. They form a solid base to develop on top of and help you remove the tedious work of create getters
@@ -30,8 +30,6 @@ For a simple understanding of how easy is to work with property assignment and
 property value retrieving lets create a basic class:
 
 ```php
-<?php
-
 use Slick\Common\Base;
 
 class Car extends Base
@@ -201,24 +199,24 @@ information about each access annotation.
 | `@readwrite` | You can get or change the property value. | - |
 
 
-    Careful
+#### Careful
 
-    It also important to know that if you try to read the value of an undefined
-    property you will get a `NULL` value, but if you try to set the value of an
-    undefined property an `Slick\Common\Exception\UndefinedPropertyException`
-    exception will be thrown.
+It also important to know that if you try to read the value of an undefined
+property you will get a `NULL` value, but if you try to set the value of an
+undefined property an `Slick\Common\Exception\UndefinedPropertyException`
+exception will be thrown.
 
 
-    Note
-    
-    When working with modern IDEs you will have warnings about accessing
-    properties that are `protected` or methods that aren't defined.
-    To avoid this errors you can add dock block tags to your class like
-    `@property`, `@method`, `@property-read`
-    and `@property-write`.
-    
-    Please refer to [phpDocumentor manual page](http://manual.phpdoc.org/HTMLSmartyConverter/PHP/phpDocumentor/tutorial_tags.property.pkg.html)
-    for more information about those tags.
+#### Note
+
+When working with modern IDEs you will have warnings about accessing
+properties that are `protected` or methods that aren't defined.
+To avoid this errors you can add dock block tags to your class like
+`@property`, `@method`, `@property-read`
+and `@property-write`.
+
+Please refer to [phpDocumentor manual page](http://manual.phpdoc.org/HTMLSmartyConverter/PHP/phpDocumentor/tutorial_tags.property.pkg.html)
+for more information about those tags.
 
 ### Use it in any class
 
@@ -265,13 +263,13 @@ print $user->getEmail(); // Will print out "joe@example.com"
 
 ```
 
-    Note about performance
-    
-    Although the usage became simplified by using `Slick\Common\Base`
-    class or the `Slick\Common\BaseMethods` trait keep in mind that
-    extra work and class inspection is done by those methods tho perform
-    this features. We think about it when developing these classes and we try
-    to keep it at the best performance we could. 
+#### Note about performance
+
+Although the usage became simplified by using `Slick\Common\Base`
+class or the `Slick\Common\BaseMethods` trait keep in mind that
+extra work and class inspection is done by those methods tho perform
+this features. We think about it when developing these classes and we try
+to keep it at the best performance we could. 
 
 
 ## Testing
