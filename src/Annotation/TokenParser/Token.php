@@ -25,7 +25,7 @@ class Token
     private $index;
 
     /**
-     * @var string
+     * @var string[]|string
      */
     private $value;
 
@@ -48,6 +48,7 @@ class Token
             $data = array_replace($data, $tokenData);
         }
 
+        /** @var string[]|string $value */
         list($index, $value, $lineNumber) = $data;
         $this->index = $index;
         $this->value = $value;
@@ -83,7 +84,7 @@ class Token
     }
 
     /**
-     * @return string|null
+     * @return string
      */
     public function getLineNumber()
     {

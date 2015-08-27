@@ -12,7 +12,7 @@ use LogicException;
 use Slick\Common\Exception;
 
 /**
- * Invalid argument exception for exception trowed in slick/common package
+ * Invalid argument usage exception thrown in slick/common package
  *
  * @package Slick\Common\Exception
  */
