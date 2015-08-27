@@ -3,8 +3,8 @@
 [![Latest Version](https://img.shields.io/github/release/slickframework/common.svg?style=flat-square)](https://github.com/slickframework/common/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/slickframework/common/develop.svg?style=flat-square)](https://travis-ci.org/slickframework/common)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/slickframework/common.svg?style=flat-square&b=develop=develop)](https://scrutinizer-ci.com/g/slickframework/common/code-structure?branch=develop)
-[![Quality Score](https://img.shields.io/scrutinizer/g/slickframework/common.svg?style=flat-square&branch=develop)](https://scrutinizer-ci.com/g/slickframework/common?branch=develop)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/slickframework/common/develop.svg?style=flat-square)](https://scrutinizer-ci.com/g/slickframework/common/code-structure?branch=develop)
+[![Quality Score](https://img.shields.io/scrutinizer/g/slickframework/common/develop.svg?style=flat-square)](https://scrutinizer-ci.com/g/slickframework/common?branch=develop)
 [![Total Downloads](https://img.shields.io/packagist/dt/slick/common.svg?style=flat-square)](https://packagist.org/packages/slick/common)
 
 Slick common package contains a set of useful classes and traits that are used by almost every class in the entire
