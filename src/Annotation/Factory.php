@@ -42,6 +42,24 @@ class Factory
     private static $defaultClass = "Slick\\Common\\Annotation\\Basic";
 
     /**
+     * @var array Saves the annotation classes found for used names
+     */
+    private static $discoveries = [];
+
+    /**
+     * @var array Known tags that should be used as Basic annotation
+     */
+    private static $knownTags = [
+        '@readwrite', '@read', '@write',
+        '@var', '@param', '@return', '@throws', '@see', '@author', '@link',
+        '@package', '@deprecated', '@property', '@property-read', '@license',
+        '@property-write', '@copyright', '@api', '@uses', '@used-by',
+        '@category', '@example', '@filesource', '@ignore', '@copyright',
+        '@global', '@internal', '@method', '@since', '@source', '@subpackage',
+        '@todo', '@version'
+    ];
+
+    /**
      * Creates a list of annotations from provided comment text
      *
      * @param string $comment
@@ -169,6 +187,15 @@ class Factory
      */
     private function getClassAliasName($tag)
     {
+        $key = $this->reflection->getName().'::@'.$tag;
+        if (in_array("@{$tag}", self::$knownTags)) {
+            return $this->getDefaultClass();
+        }
+
+        if (isset(self::$discoveries[$key])) {
+            return self::$discoveries[$key];
+        }
+
         $imports = $this->getPhpParser()
             ->parseClass($this->reflection);
         $class = $this->getDefaultClass();
@@ -182,6 +209,9 @@ class Factory
                 break;
             }
         }
+
+
+        self::$discoveries[$key] = $class;
 
         return $class;
     }

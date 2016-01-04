@@ -19,10 +19,8 @@ use Slick\Common\Base;
  *
  * @property string $name
  * @property string $mail
- *
- * @property-write string $state
- *
- * @property-read string $fullName
+ * @property string $state
+ * @property string $fullName
  *
  * @method string getMail()
  */
