@@ -87,4 +87,23 @@ class TextTest extends \PHPUnit_Framework_TestCase {
         }
     }
 
+    /**
+     * Truncate strings
+     * @test
+     */
+    public function truncate()
+    {
+        $this->assertEquals('123', Text::truncate('1234', 3, ''));
+        $this->assertEquals('123 123...', Text::truncate('123 123 123', 5, '...', true));
+        $this->assertEquals('123 123', Text::truncate('123 123', 5, '...', true));
+    }
+
+    /**
+     * Word wrap test
+     * @test
+     */
+    public function wordwrap()
+    {
+        $this->assertEquals("123\n123", Text::wordwrap('123 123', 3));
+    }
 }
