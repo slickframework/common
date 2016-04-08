@@ -40,7 +40,7 @@ class Log extends Base
      * @readwrite
      * @var string Sets the name for default logger.
      */
-    protected $defaultLogger = 'general';
+    protected static $defaultLogger = 'general';
 
     /**
      * @readwrite
@@ -71,7 +71,7 @@ class Log extends Base
      */
     public function getLogger($name = null)
     {
-        $name = is_null($name) ? $this->defaultLogger : $name;
+        $name = is_null($name) ? self::$defaultLogger : $name;
         $name = "{$this->prefix}$name";
         if (!isset(static::$loggers[$name])) {
             static::$loggers[$name] = new Logger($name);
@@ -94,6 +94,16 @@ class Log extends Base
         foreach ($this->handlers as $handler) {
             $logger->pushHandler($handler);
         }
+    }
+
+    /**
+     * Sets the logger (facility) name
+     * 
+     * @param $name
+     */
+    public static function setFacility($name)
+    {
+        self::$defaultLogger = $name;
     }
 
 }
