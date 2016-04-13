@@ -270,6 +270,10 @@ class Text
      */
     protected static function preserveBreakpoint($value, $length)
     {
+        if (strlen($value) <= $length) {
+            return $length;
+        }
+
         $breakpoint = mb_strpos($value, ' ', $length);
         $length = $breakpoint;
         if (false === $breakpoint) {

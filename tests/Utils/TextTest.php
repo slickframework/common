@@ -106,4 +106,15 @@ class TextTest extends \PHPUnit_Framework_TestCase {
     {
         $this->assertEquals("123\n123", Text::wordwrap('123 123', 3));
     }
+
+    /**
+     * Fix Warning: mb_strpos(): Offset not contained in string in
+     * Utils/Text::preserveBreakpoint()
+     * @test
+     */
+    public function offsetBug()
+    {
+        $content = 'Hotel Marina Atlântico - Ponta Delgada São Miguel';
+        $this->assertEquals($content, Text::truncate($content, 75, '...', true));
+    }
 }
