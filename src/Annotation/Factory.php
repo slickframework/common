@@ -154,6 +154,7 @@ class Factory
     private function getClassName($tag)
     {
         $className = $tag;
+
         if (!class_exists($tag)) {
             $className = $this->getClassInNamespace($tag);
         }
@@ -170,6 +171,9 @@ class Factory
      */
     private function getClassInNamespace($tag)
     {
+        if (in_array("@{$tag}", self::$knownTags)) {
+            return $this->getDefaultClass();
+        }
         $namespace = $this->reflection->getNamespaceName();
         $className = "{$namespace}\\{$tag}";
 
@@ -188,10 +192,6 @@ class Factory
     private function getClassAliasName($tag)
     {
         $key = $this->reflection->getName().'::@'.$tag;
-        if (in_array("@{$tag}", self::$knownTags)) {
-            return $this->getDefaultClass();
-        }
-
         if (isset(self::$discoveries[$key])) {
             return self::$discoveries[$key];
         }

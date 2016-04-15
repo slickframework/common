@@ -7,8 +7,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Slick\tests\Common;
+namespace Slick\Tests\Common;
 
+use Slick\Common\Annotation\Basic;
 use Slick\Common\Inspector;
 use PHPUnit_Framework_TestCase as TestCase;
 
@@ -105,5 +106,20 @@ class InspectorTest extends TestCase
             ->getMethodAnnotations('testGetMethodAnnotations')
             ->getAnnotation('@tag');
         $this->assertEquals(1, $annotation->getParameter('o')->a);
+    }
+
+    /**
+     * Known PHP doc block tags should always return a Basic annotation
+     * @test
+     */
+    public function getAnnotationsFOrPackageClass()
+    {
+        $inspector = Inspector::forClass(Package::class);
+        $annotations = $inspector->getClassAnnotations();
+        $this->assertTrue($annotations->hasAnnotation('package'));
+        $this->assertInstanceOf(
+            Basic::class,
+            $annotations->getAnnotation('package')
+        );
     }
 }
