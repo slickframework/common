@@ -102,7 +102,10 @@ class Basic implements AnnotationInterface
      */
     protected function checkCommonTags()
     {
-        if (in_array($this->getName(), $this->commonTags)) {
+        if (
+            in_array($this->getName(), $this->commonTags) &&
+            array_key_exists('raw', $this->parameters)
+        ) {
             $this->value = $this->parameters['raw'];
         }
     }
