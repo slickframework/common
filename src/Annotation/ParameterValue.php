@@ -159,6 +159,14 @@ class ParameterValue
         if (is_numeric($value)) {
             return $this->checkNumberType($value);
         }
+        return $this->checkString($value);
+    }
+
+    private function checkString($value)
+    {
+        if (is_string($value)) {
+            $value = str_replace(['"', "'"], '', $value);
+        }
         return $value;
     }
 

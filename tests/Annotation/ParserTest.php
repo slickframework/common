@@ -33,7 +33,7 @@ class ParserTest extends TestCase
  * This is NOT an empty tag comment.
  * @tag1
  * @tag2 someTag
- * @tag3 otherTag, with=parameters
+ * @tag3 otherTag, with="text parameters"
  */
 EOC;
 
@@ -48,7 +48,7 @@ EOC;
 
 
     /**
-     * @covers Slick\Common\Annotation\Parser::__constructor()
+     * @covers \Slick\Common\Annotation\Parser::__constructor()
      */
     protected function setup()
     {
@@ -66,7 +66,7 @@ EOC;
     }
 
     /**
-     * @covers Slick\Common\Annotation\Parser::getTags()
+     * @covers \Slick\Common\Annotation\Parser::getTags()
      */
     public function testParseEmptyTagsComment()
     {
@@ -76,27 +76,8 @@ EOC;
     }
 
     /**
-     * @covers Slick\Common\Annotation\Parser::getTags()
-     */
-    public function testParseMultipleTagsComment()
-    {
-        $expected = [
-            ["@tag1\n", 'tag1'],
-            ["@tag2 someTag\n", 'tag2', 'someTag'],
-            [
-                "@tag3 otherTag, with=parameters\n */",
-                'tag3',
-                'otherTag, with=parameters'
-            ],
-        ];
-
-        $this->parser->setComment($this->multiTagComment);
-        $this->assertEquals($expected, $this->parser->getTags());
-    }
-
-    /**
-     * @covers Slick\Common\Annotation\Parser::setComment()
-     * @covers Slick\Common\Annotation\Parser::__construct()
+     * @covers \Slick\Common\Annotation\Parser::setComment()
+     * @covers \Slick\Common\Annotation\Parser::__construct()
      */
     public function testCommentSetterResetTags()
     {
@@ -113,8 +94,8 @@ EOC;
             'tag2' => ['someTag' => true, 'raw' => 'someTag'],
             'tag3' => [
                 'otherTag' => true,
-                'with' => 'parameters',
-                'raw' => 'otherTag, with=parameters'
+                'with' => 'text parameters',
+                'raw' => 'otherTag, with="text parameters"'
             ],
         ];
         $this->assertEquals($expected, $this->parser->getAnnotationData());

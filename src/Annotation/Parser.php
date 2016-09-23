@@ -16,13 +16,11 @@ namespace Slick\Common\Annotation;
  */
 class Parser
 {
-    /**#@+
+    /**
      * @var string Annotation related regular expression
      * @codingStandardsIgnoreStart
      */
-    const ANNOTATION_REGEX = '/@([\w,\\\\]+)(?:\s*(?:\(\s*)?(.*?)(?:\s*\))?)??\s*(?:\n|\*\/)/i';
-    const ANNOTATION_PARAMETERS_REGEX = '/([\w]+\s*=\s*[\[\{"]{1}[\w,\\\\\s:\."\{\[\]\}]+[\}\]""]{1})|([\w]+\s*=\s*[\\\\\w\.]+)|([\\\\\w]+)/i';
-    /**#@-*/
+    const ANNOTATION_REGEX = '/@(?P<tagName>[\w\\\\]+\s)(?P<tagParams>[\\\\0-9a-z,\s="\'\n\*\}\{\]\[:]*)/i';
     // @codingStandardsIgnoreEnd
 
     /**
@@ -58,12 +56,15 @@ class Parser
         $tags = $this->getTags();
         $annotationData = [];
         foreach ($tags as $tag) {
-            $name = $tag[1]; // Annotation name
+            $name = trim($tag['tagName']); // Annotation name
             $value = true; // Default annotation value
 
-            if (isset($tag[2])) {
-                $value = $this->parseParameters($tag[2]);
-                $value['raw'] = $tag[2];
+            if (isset($tag['tagParams'])) {
+                $param = trim(trim(trim($tag['tagParams']), '*'));
+                $value = $this->parseParameters($param);
+                if (is_array($value)) {
+                    $value['raw'] = $param;
+                }
             }
 
             $annotationData[$name] = $value;
@@ -114,24 +115,35 @@ class Parser
      *
      * @param string $parameters The parameters part of a tag
      *
-     * @return array An associative array with key/value pairs
+     * @return array|true An associative array with key/value pairs
      */
     private function parseParameters($parameters)
     {
         $value = [];
-        $canBeParsed = preg_match_all(
-            static::ANNOTATION_PARAMETERS_REGEX,
-            $parameters,
-            $result
-        );
-
-        if ($canBeParsed) {
-            foreach ($result[0] as $part) {
-                $param = $this->getKeyValuePair($part);
-                $value[$param['name']] = $param['value'];
+        $parts = explode(',', $parameters);
+        foreach ($parts as $param) {
+            $pair = $this->parseParam(trim($param));
+            if (!is_array($pair)) {
+                $value = true;
+                break;
             }
+            $value[$pair['name']] = $pair['value'];
         }
         return $value;
+    }
+
+    private function parseParam($param)
+    {
+        if (strlen($param) <= 0) {
+            return true;
+        }
+        return strpos($param, '=') > 0
+            ? $this->getKeyValuePair($param)
+            : [
+                'name' => $param,
+                'value' => true
+            ]
+        ;
     }
 
     /**
