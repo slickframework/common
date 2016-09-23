@@ -100,4 +100,30 @@ EOC;
         ];
         $this->assertEquals($expected, $this->parser->getAnnotationData());
     }
+
+    public function testSingleName()
+    {
+        $comment = <<<COMMENT
+/**
+ * User
+ * 
+ * @package Domain
+ * @author  Filipe Silva <filipe.silva@sata.pt>
+ *
+ * @adapter userDatabase
+ *
+ * @property string name
+ * @property string username
+ */   
+COMMENT;
+        $this->parser->setComment($comment);
+        $tags = $this->parser->getAnnotationData();
+        $tag = $tags['adapter'];
+        $expected = [
+            'userDatabase' => true,
+            'raw' => 'userDatabase'
+        ];
+        $this->assertEquals($expected, $tag);
+
+    }
 }

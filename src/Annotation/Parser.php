@@ -63,13 +63,23 @@ class Parser
                 $param = trim(trim(trim($tag['tagParams']), '*'));
                 $value = $this->parseParameters($param);
                 if (is_array($value)) {
-                    $value['raw'] = $param;
+                    $value['raw'] = $this->clearParam($param);
                 }
             }
 
             $annotationData[$name] = $value;
         }
         return $annotationData;
+    }
+
+    private function clearParam($param)
+    {
+        $param = rtrim(rtrim(trim($param), '*'));
+        $crp = strrpos($param, "\n");
+        if ($crp > 0) {
+            $param = substr($param, 0, $crp);
+        }
+        return $param;
     }
 
     /**
@@ -122,6 +132,7 @@ class Parser
         $value = [];
         $parts = explode(',', $parameters);
         foreach ($parts as $param) {
+            $param = $this->clearParam($param);
             $pair = $this->parseParam(trim($param));
             if (!is_array($pair)) {
                 $value = true;
