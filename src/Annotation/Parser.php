@@ -20,7 +20,7 @@ class Parser
      * @var string Annotation related regular expression
      * @codingStandardsIgnoreStart
      */
-    const ANNOTATION_REGEX = '/@(?P<tagName>[\w\\\\]+\s)(?P<tagParams>[\\\\0-9a-z,\s="\'\n\*\}\{\]\[:]*)/i';
+    const ANNOTATION_REGEX = '/@(?P<tagName>[\w\\\\]+\s)(?P<tagParams>[\\\\0-9a-z,\s="\'\n\*\}\{\]\[:\t\_\#\.]*)/i';
     // @codingStandardsIgnoreEnd
 
     /**
@@ -167,12 +167,14 @@ class Parser
     private function getKeyValuePair($part)
     {
         $parts = explode("=", $part, 2);
-        $pair = ['name' => $parts[0], 'value' => true];
+        $name = trim(str_replace('*', '', $parts[0]));
+        $pair = ['name' => $name, 'value' => true];
         if (isset($parts[1])) {
-            $value = new ParameterValue($parts[1]);
+            $value = new ParameterValue(trim($parts[1]));
+            $real = $value->getRealValue();
             $pair = [
-                'name' => $parts[0],
-                'value'=> $value->getRealValue()
+                'name' => $name,
+                'value'=> $real
             ];
         }
         return $pair;

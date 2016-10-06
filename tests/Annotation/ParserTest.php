@@ -101,6 +101,30 @@ EOC;
         $this->assertEquals($expected, $this->parser->getAnnotationData());
     }
 
+    public function testComplexAnnotation()
+    {
+        $comment = <<<COMMENT
+/**
+ * @readwrite
+ * @belongsTo Some\Domain,
+ *      foreignKey = app_id,
+ *      lazyLoaded = true,
+ *      tableName = dbo.test#test
+ */   
+COMMENT;
+        $this->parser->setComment($comment);
+        $tags = $this->parser->getAnnotationData();
+        $tag = $tags['belongsTo'];
+        $expected = [
+            'Some\Domain' => true,
+            'foreignKey' => 'app_id',
+            'lazyLoaded' => true,
+            'tableName' => 'dbo.test#test',
+        ];
+        unset($tag['raw']);
+        $this->assertEquals($expected, $tag);
+    }
+
     public function testSingleName()
     {
         $comment = <<<COMMENT
